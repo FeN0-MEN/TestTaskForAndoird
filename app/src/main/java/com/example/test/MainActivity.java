@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < 5; i++) {
                         ImageButton newButton = createCircularButton(imageResources[i]);
                         setSwipeListener(newButton, linearLayout);
-
+                        // Применяем анимацию появления
                         Animation slideUpAnimation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_up);
                         slideUpAnimation.setStartOffset(i * 100);
                         newButton.startAnimation(slideUpAnimation);
@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    // Параметры для созданных кнопок 
     private ImageButton createCircularButton(int imageResource) {
         ImageButton newButton = new ImageButton(MainActivity.this);
         int sizeInPixels = (int) getResources().getDimension(R.dimen.circular_button_size);
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        // Обраточик события свайпа в сторону
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             float deltaX = e2.getX() - e1.getX();
@@ -130,13 +133,11 @@ public class MainActivity extends AppCompatActivity {
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
                 if (Math.abs(deltaX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                     // Свайп влево или вправо
-                    if (deltaX > 0) {
-                        // Свайп вправо
-                        // Ваш код для обработки свайпа вправо
+                    if (deltaX > 0) { // Свайп вправо
+                        // Код для обработки свайпа вправо
                         linearLayout.removeView(button);
-                    } else {
-                        // Свайп влево
-                        // Ваш код для обработки свайпа влево
+                    } else { // Свайп влево
+                        // Код для обработки свайпа влево
                         linearLayout.removeView(button);
                     }
                     return true;
